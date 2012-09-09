@@ -1,0 +1,109 @@
+<html>
+<head>
+<title>presentation</title>
+</head>
+<script type="text/javascript" src="LaTeXMathML.js"></script>
+<script type="text/javascript" src="underscore.js"></script>
+<!--
+<script type="text/javascript" src="jquery-1.8.1.min.js"></script>
+-->
+<script type="text/javascript" src="script.js"></script>
+<link rel="stylesheet" type="text/css" href="style.css"></link>
+
+<body>
+
+<div align="center" id="title" name="title" class="section">
+	<h1 style="padding-top: 100px;">Gaussian Mixture Models using Variational Bayes</h1>
+	<h3>by Daniel Perry</h3>
+	<h2>Presentation URL</h2>
+	  	<p>
+		 		to follow along: <a href="http://www.cs.utah.edu/~dperry/class/seminar/vbgmm">www.cs.utah.edu/~dperry/class/seminar/vbgmm</a>
+			</p>
+	  	<p>
+				to post comments/suggestions: <a href="http://images-and-data.blogspot.com">images-and-data.blogspot.com</a>
+			</p>
+</div>
+
+
+<div id="kmeans" name="kmeans" class="section">
+	<h2>K-means clustering</h2>
+
+	Goal: groups similar data together
+	<ul>
+	<li> similar - requires some measure, here we'll use Euclidean distance.</li>
+	<li> group membership - here we'll define a mean for each group, and define membership as being closest to a groups mean. </li>
+	</ul>
+
+	<p>
+	$x^i$
+	</p>
+
+	<canvas id="kmeans_example1" width="500" height="500">
+	</canvas>
+
+</div>
+
+<div id="gmm" name="gmm" class="section">
+<a name="gmm"></a>
+	<h2>Gaussian Mixture Models (GMM)</h2>
+	<div id="gmm_definition" class="subsection">
+		<h3>Definition</h3>
+	</div>
+	<div id="gmm_kmeans" class="subsection">
+		<h3>K-means as GMM</h3>
+	</div>
+	<div id="gmm_ml" class="subsection">
+		<h3>GMM Maximum Likelihood</h3>
+	</div>
+</div>
+
+<div id="em" name="em" class="section">
+	<h2>Expectation-Maximization</h2>
+	<div id="em_definition" class="subsection">
+	</div>
+	<div id="em_gmm" class="subsection">
+	</div>
+</div>
+
+<div id="vb" name="vb" class="section">
+	<h2>Variational Bayes</h2>
+	<div id="vb_bayes" class="subsection">
+		<h3>Bayes formulation</h3>
+	</div>
+	<div id="vb_estimation" class="subsection">
+	  <h3>Variational Inference</h3>
+	</div>
+</div>
+
+<div id="references" name="references" class="section">
+	<h2>Presentation URL</h2>
+		<ul>
+	  	<li>
+		 		to review: <a href="http://www.cs.utah.edu/~dperry/class/seminar/vbgmm">www.cs.utah.edu/~dperry/class/seminar/vbgmm</a>
+			</li>
+	  	<li>
+				to post comments/suggestions: <a href="http://images-and-data.blogspot.com">images-and-data.blogspot.com</a>
+			</li>
+		</ul>
+	<h2>References</h2>
+	<ol>
+		<li>
+			Bishop, Christopher M. (2006). "Pattern Recognition and Machine Learning". Springer. ISBN 0-387-31073-8.
+			(sections 10.2 and 9.4)
+		</li>
+		<li>
+			<a href="http://research.microsoft.com/~cmbishop/downloads/Bishop-AIStats01.pdf" target="_blank">http://research.microsoft.com/~cmbishop/downloads/Bishop-AIStats01.pdf</a>
+		</li>
+		<li>
+			<a href="http://www.goldenmetallic.com/research/uai99.pdf" target="_blank">http://www.goldenmetallic.com/research/uai99.pdf</a>
+		</li>
+		<li>
+			<a href="https://en.wikipedia.org/wiki/Variational_Bayesian_methods" target="_blank">https://en.wikipedia.org/wiki/Variational_Bayesian_methods</a>
+		</li>
+	</ol>
+</div>
+
+
+</body>
+</html>
+

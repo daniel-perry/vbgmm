@@ -1,0 +1,25 @@
+
+//http://colorschemedesigner.com/#3A31TvfgMw0w0
+
+canvas { border: 1px solid black; }
+body {
+	background: #3770AB;
+	background: -webkit-linear-gradient(left, #5680AB , #3770AB );
+	background: -moz-linear-gradient(left, #5680AB , #3770AB );
+}
+
+.section { 
+	//color: #862F03;
+	color: #222;
+	background: #fff;
+	//border: 1px solid #092F57; 
+	border-radius: 7px;
+	box-shadow: 5px 2px 2px #092F57;
+	padding: 10px;
+	padding-left: 20px;
+	margin: 20px 0px 100px 10px;
+	min-height: 700px;
+}
+.section a:link {color: #BF6030;}
+.section a:visited {color: #A68000;}
+.section a:hover {color: #A68000;}

@@ -144,20 +144,77 @@
 	<h2>Gaussian Mixture Models (GMM)</h2>
 	<div id="gmm_definition" class="subsection">
 		<h3>Definition</h3>
+		<p> A <a href="http://en.wikipedia.org/wiki/Mixture_model#Gaussian_mixture_model">Gaussian mixture distribution</a> as a linear superposition of Gaussians.</p>
+		<p>we have $k$ gaussian distributions: $N(x|\mu_k,\Sigma_k)$</p>
+    <p>Each point $x$:</p>
+		<p> has a mixing coefficient: $\pi_k$: $0 \le \pi_k \le 1$ and $\sum_k\pi_k=1$</p>
+		<p>so we can say the gaussian mixture for point $x$ is:</p>
+		<p>$p(x) = \sum_k\pi_k N(x|\mu_k,\Sigma_k)$ &nbsp;&nbsp;&nbsp;(4)</p>
 	</div>
 	<div id="gmm_kmeans" class="subsection">
-		<h3>K-means as GMM</h3>
+		<h3>Aside: K-means as GMM</h3>
+		<p>One way of thining of K-means is fitting a GMM where means vary, but all covariances are the same and the mixing coefficient is a "1-of-K" vector.</p>
+		<p> ie (hand waving, general idea):</p>
+		<p>$p(x) = \sum_k\pi_k N(x|\mu_k,\Sigma)$ - note that $\Sigma$ does not vary with $k$.</p>
+		<p> where $\mu_k$ corresponds to the k<sup>th</sup> cluster center,</p>
+		<p>and $\pi_k = r_{\cdot k}$ for each $x$.</p>
+		<p><i>This relationship can help in thinking about GMM's in general.</i></p>
+
 	</div>
 	<div id="gmm_ml" class="subsection">
 		<h3>GMM Maximum Likelihood</h3>
+		<p>Data set: A set of N, D-dimensional observations $\{x_1,...,x_N\}$, represented by a N x D matrix $X$.</p>
+		<p><i>Goal</i>: fit a GMM to the data.</p>
+		<p>To measure error (similar to $J$ for k-means), we use log-likelihood:</p>
+		<p></i>(ie, what is the <a href="http://en.wikipedia.org/wiki/Likelihood_function">likelihood</a> the GMM matches $X$ - basically a probability over the data)</i></p>
+		<p>ln$ p(X|\pi,\mu,\Sigma) = \sum_n $ln$\{ \sum_k \pi_k N(x_n|\mu_k,\Sigma_k) \}$ &nbsp;&nbsp;&nbsp;(5) - compare to (1)</p>
+		<p><i>Goal update</i>: to fit the GMM, we need to maximize (5).</p>
+		
 	</div>
 </div>
 
 <div id="em" name="em" class="section">
 	<h2>Expectation-Maximization</h2>
-	<div id="em_definition" class="subsection">
-	</div>
 	<div id="em_gmm" class="subsection">
+	<p><i>(we will only be discussing EM in the context of GMM)</i></p>
+	<p>In order to frame the EM of GMM, we need an explicit latent variable $z$:</p>
+	<p>$z_{n}$ - a binary 1-of-K latent variable corresponding to sample $x_n$, where $p(z_{nk}=1)=\pi_k$</p>
+	<p>Because of this, we can say $p(z) = \prod_k \pi_k^{z_k} = \pi_k$.</p>
+	<p>Likewise, $p(x|z) = \prod_k N(x|\mu_k,\Sigma_k)^{z_k} = N(x|\mu_k,\Sigma_k)$</p>
+	<p>Consequenty, p(x) = \sum_z p(z)p(x|z) = \sum_k \pi_kN(x|\mu_k,\Sigma_k)</p>
+	<p><i>We have successfully rewritten the Mixture of Gaussians with an explicit latent variable, $z$. </i></p>
+	<br>
+	<p> It will also be useful to use the conditional probability of $z$ given $x$:</p>
+	<p>$\gamma(z_k) = p(z_k=1|x)$</p>
+	<br>
+	<p>We view $\pi_k$ as the <b>prior probability</b> of $z_k=1$, and $\gamma(z_k)$ as the <b>posterior probability</b> once we have observed $x$.</p>
+	</div>
+	<div id="em_step" class="subsection">
+	<p><i>(for brevity, I leave out the derivations, but by solving the derivatives of the log-likelihood function, we find equations used in E and M steps below.)</i></p>
+	<h3>EM steps</h3>
+	<ol>
+	  <li>
+  	Initialize $\mu,\Sigma,\pi$.<br>Evaluate initial log-likelihood.
+  	</li>
+  	<li>
+		<b>E-step</b><br>Evaluate the responsibilities using current parameters:<br>
+		$\gamma(z_{nk}) = \frac{\pi_kN(x_n|\mu_k,\Sigma_k)}{\sum_j^K \pi_j N(x_n|\mu_j,\Sigma_j)}$
+    </li>
+		<li>
+ 		<b>M-step</b><br>Re-estimate parameters using current responsibilities:<br>
+		$\mu_k^{i+1} = \frac{1}{N_k}\sum_n\gamma(z_{nk})x_n$<br>
+		$\Sigma_k^{i+1} = \frac{1}{N_k}\sum_n\gamma(z_{nk})(x_n-\mu_k^{i+1})(x_n-\mu_k^{i+1})^T$<br>
+		$\pi_k^{i+1} = \frac{N_k}{N}$<br>
+		where $N_k = \sum_n\gamma(z_{nk})
+		</li>
+		<li>
+		Evalute log-likelihood.<br> Check for convergence.<br> If not, return to step 2.
+		</li>
+	</ol>
+	</i>This 2-step iteration process is very similar to what we did in K-means above.</i>
+	</div>
+	<div id="em_example" class="subsection">
+	Example:
 	</div>
 </div>
 

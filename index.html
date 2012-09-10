@@ -40,7 +40,7 @@
 <div align="center" id="title" name="title" class="section">
 	<h1 style="padding-top: 100px;">Gaussian Mixture Models using Variational Bayes</h1>
 	<h3>by Daniel Perry</h3>
-	<h2>Presentation URL</h2>
+	<h4 style="padding-top: 100px;">presentation url:</h4>
 	  	<p>
 		 		to follow along: <a href="http://www.cs.utah.edu/~dperry/class/seminar/vbgmm">www.cs.utah.edu/~dperry/class/seminar/vbgmm</a>
 			</p>
@@ -53,15 +53,58 @@
 <div id="kmeans" name="kmeans" class="section">
 	<h2>K-means clustering</h2>
 
-	Goal: groups similar data together
+	<div id="kmeans_def" class="subsection">
+	Goal: cluster similar data together
 	<ul>
-	<li> similar - requires some measure, here we'll use Euclidean distance.</li>
-	<li> group membership - here we'll define a mean for each group, and define membership as being closest to a groups mean. </li>
+  <li> data: N points of a D-dimensional data set, $\{x_1,...,x_N\}$, where $x_i$ refers to the i<sup>th</sup> point</li>
+	<li> similarity: requires some measure of similarity, we'll use Euclidean distance.</li>
+	<li> cluster membership: clusters will be described by center value, and each point will only belong to a single cluster. <br>
+  	Notation:
+		<ul>
+		<li>$\mu_k$ describes the center of the k<sup>th</sup> cluster.</li>
+		<li>membership will be denoted with a "1-of-K" vector, $r_{nk} \in \{0,1\}$ corresponding to each $x_i$.<br>$r_{ik} = 1$ and $r_{ij} = 0$ for $j\nek$ if $x_{i}$ belongs to cluster $k$.
+    </li>
+<!-- TODO: add visual of this? -->
+	  </ul>
+  </li>
 	</ul>
+  </div>
 
-	<p>
-	$x^i$
-	</p>
+  <div id="kmeans_objective" class="subsection">
+
+  <p>We can define an objective function:</p>
+  <p>$J = \sum_n\sum_k r_{nk}||x_n-\mu_k||^2$ &nbsp;&nbsp;&nbsp;(1)</p>
+  <p>Which corresponds to the "sum of squares" of each point to its assigned cluster center.</p>
+
+	<p> The real goal is to minimize $J$, ie find the values of $\mu$ and $r$ that minimize $J$.</p>
+	
+	<p> The optimal $\mu$ and $r$ can be derived analytically from $J$, but we will only describe the derivation here.</p>
+
+  <ul>
+  <li><b>cluster center:</b><br>
+  derivation: the cluster center that minimizes the sum of squares to every point in the cluster, is the mean:<br>
+  $\vec{\mu_k} = (\sum_nr_{nk}\vec{x_n})/(\sum_nr_{ik})$ &nbsp;&nbsp;&nbsp;(2)
+  </li>
+  <li><b>cluster membership:</b><br>
+  derivation: the cluster membership that minimizes sum of squares to the mean, is the cluster with the closest center: <br>
+  $r_{nk} = 1 &nbsp;&nbsp;if $ $k=arg min_j ||\vec{x_n} - \vec{\mu_j}||^2$, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(3)<br>$r_{nk} = 0$ otherwise.
+  </li>
+  </ul>
+
+	<p>Note the circular dependency above betwen $\mu_k$ and $r_{\cdot k}$ (cluster mean and cluster membership)</p>
+  </div>
+
+  <div id="kmeans_steps" class="subsection">
+	<p>Because of this circular dependency, we find the optimum by iteratively switching between them, until there is no change.</p>
+  <p>(note: this is guaranteed to find a local optimum, but not the global optimum)</p>
+  Steps:
+  <ol>
+  <li> $\mu$ initialized randomly. </li>
+	<li> Solve for $r$ using (3). </li>
+  <li> Solve for $\mu$ using (2). </li>
+  <li> Repeat steps 2 and 3, until $\mu$ and $r$ don't change. </li>
+  </ol>
+  </div>
 
 	<canvas id="kmeans_example1" width="500" height="500">
 	</canvas>

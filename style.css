@@ -25,7 +25,9 @@
 
 //http://colorschemedesigner.com/#3A31TvfgMw0w0
 
+
 canvas { border: 1px solid black; }
+
 body {
 	background: #3770AB;
 	background: -webkit-linear-gradient(left, #5680AB , #3770AB );
@@ -53,4 +55,13 @@ body {
 	border-radius: 7px;
 	padding: 2px;
 }
+
+ .chart div {
+   font: 10px sans-serif;
+   background-color: steelblue;
+   text-align: right;
+   padding: 3px;
+   margin: 1px;
+   color: white;
+ }
 

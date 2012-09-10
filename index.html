@@ -27,12 +27,23 @@
 ////////////////////////////////////////
 -->
 </head>
+
+<!-- libs -->
 <script type="text/javascript" src="LaTeXMathML.js"></script>
 <script type="text/javascript" src="underscore.js"></script>
 <!--
+<script type="text/javascript" src="d3.v2.min.js"></script>
 <script type="text/javascript" src="jquery-1.8.1.min.js"></script>
 -->
+
+<!-- local -->
+<script type="text/javascript" src="kmeans.js"></script>
 <script type="text/javascript" src="script.js"></script>
+
+<!-- data sets: -->
+<script type="text/javascript" src="faithful.js"></script>
+
+<!-- css -->
 <link rel="stylesheet" type="text/css" href="style.css"></link>
 
 <body>
@@ -106,8 +117,25 @@
   </ol>
   </div>
 
-	<canvas id="kmeans_example1" width="500" height="500">
+	<div id="kmeans_examples" class="subsection">
+	<p>Example: <a href="#" onclick="runKmeans(false); return false;">[step]</a><a href="#" onclick="runKmeans(true); return false;">[finish]</a><a href="#" onclick="restartKmeans(); return false;">[restart]</a></p>
+  <table border=0>
+	<tr>
+	<td>
+	<canvas id="kmeans_example" width="500" height="500">
 	</canvas>
+	</td>
+	<td>
+	<canvas id="kmeans_chart" width="500" height="500"></canvas>
+	</td>
+	</tr>
+	</table>
+  <script type="text/javascript">
+  var kmeans = new Kmeans();
+  kmeans.canvasId =  'kmeans_example';
+  kmeans.canvasId2 =  'kmeans_chart';
+  </script>
+  </div>
 
 </div>
 

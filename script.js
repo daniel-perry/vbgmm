@@ -61,7 +61,31 @@ document.onkeydown=function(e) {
 }
 
 ///////////////////////////////////
-// Graphs:
+// Examples:
+
+// kmeans example:
+function runKmeans(finish) {
+	if(kmeans.converged) return;
+	if(kmeans.loopCount == 0) {
+    kmeans.reset(); // loads data, etc. 
+  }
+	if(finish){
+		while(!kmeans.converged){
+  	  kmeans.step();
+    	kmeans.draw(); 
+    }
+  } else {
+	  kmeans.step();
+  	kmeans.draw(); 
+	}
+}
+
+function restartKmeans() {
+	kmeans.reset();
+	kmeans.step();
+	kmeans.draw();
+}
+
 function draw() {
 	var canvas = document.getElementById('graph');
 	if(canvas.getContext){
